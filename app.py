@@ -1,10 +1,13 @@
 import pandas as pd
 df=pd.read_csv("https://raw.githubusercontent.com/syedmdfaruq/datasets/main/matches.csv")
 import dash
+import dash_auth
 from dash import dcc,html
 from dash.dependencies import Input,Output
 import plotly.express as px
+USERNAME_PASSWORD_PAIRS=[["faruq","faruq"]]
 app=dash.Dash(__name__)
+auth=dash_auth.BasicAuth(app,USERNAME_PASSWORD_PAIRS)
 server=app.server
 app.layout=html.Div([dcc.Dropdown(["best_teams","best_player","all_win_by_runs","all_win_by_wickets","lucky_venue","toss_win"],id="dropdown1"),html.Div(id="1")],style={'width': '70%'})
 a=df["season"].unique()

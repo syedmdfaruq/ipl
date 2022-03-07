@@ -9,7 +9,7 @@ USERNAME_PASSWORD_PAIRS=[["faruq","faruq"]]
 app=dash.Dash(__name__)
 auth=dash_auth.BasicAuth(app,USERNAME_PASSWORD_PAIRS)
 server=app.server
-app.layout=html.Div([html.Label("select_option_below"),dcc.Dropdown(["best_teams","best_player","all_win_by_runs","all_win_by_wickets","lucky_venue","toss_win"],id="dropdown1"),html.Div(id="1")],style={'width': '70%'})
+app.layout=html.Div([html.Div(["IPL"],style={"textAlign":"center","fontSize":30,"color":"blue"}),html.Label("select_option_below",style={"fontSize":20}),dcc.Dropdown(["best_teams","best_player","all_win_by_runs","all_win_by_wickets","lucky_venue","toss_win"],id="dropdown1"),html.Div(id="1")],style={'width': '70%'})
 a=df["season"].unique()
 a.sort()
 b=df[df["season"]==2008]["winner"].value_counts().sort_values(ascending=False)
@@ -46,7 +46,7 @@ fig5=px.bar(df,x=a1,y=a2,labels={"y":"(matches_won_after_winning_tosses/tosses_w
     Input("dropdown1","value"))
 def update_dropdown(selected):
   if selected=="best_teams":
-    return html.Div([dcc.Graph(id="best_teams_graph",figure=fig1),html.Label("select_year"),dcc.Slider(
+    return html.Div([dcc.Graph(id="best_teams_graph",figure=fig1),html.Label("select_year",style={"fontSize":20}),dcc.Slider(
         df['season'].min(),
         df['season'].max(),
         step=None,
@@ -57,7 +57,7 @@ def update_dropdown(selected):
   if selected=="best_player":
     return html.Div([dcc.Graph(figure=px.bar(df,x=[str(a[i])+" "+best_players[i] for i in range(len(a))],y=n,labels={"y":"number_of_times_player_of_the_match"}))])
   if selected=="all_win_by_runs":
-    return html.Div([dcc.Graph(id="win_by_runs_graph",figure=fig31),html.Label("select_year"),dcc.Slider(
+    return html.Div([dcc.Graph(id="win_by_runs_graph",figure=fig31),html.Label("select_year",style={"fontSize":20}),dcc.Slider(
         df['season'].min(),
         df['season'].max(),
         step=None,
@@ -65,7 +65,7 @@ def update_dropdown(selected):
         marks={str(year): str(year) for year in a},
         id="year-slider31")])
   if selected=="all_win_by_wickets":
-    return html.Div([dcc.Graph(id="win_by_wickets_graph",figure=fig32),html.Label("select_year"),dcc.Slider(
+    return html.Div([dcc.Graph(id="win_by_wickets_graph",figure=fig32),html.Label("select_year",style={"fontSize":20}),dcc.Slider(
         df['season'].min(),
         df['season'].max(),
         step=None,
@@ -73,7 +73,7 @@ def update_dropdown(selected):
         marks={str(year): str(year) for year in a},
         id="year-slider32")])
   if selected=="lucky_venue":
-    return html.Div([dcc.Graph(id="lucky_venue_graph",figure=fig4),html.Label("select_year"),dcc.Slider(
+    return html.Div([dcc.Graph(id="lucky_venue_graph",figure=fig4),html.Label("select_year",style={"fontSize":20}),dcc.Slider(
         df['season'].min(),
         df['season'].max(),
         step=None,
@@ -82,7 +82,7 @@ def update_dropdown(selected):
         id="year-slider4"
     )]) 
   if selected=="toss_win":
-    return html.Div([dcc.Graph(id="toss_win_graph",figure=fig5),html.Label("select_year"),dcc.Slider(
+    return html.Div([dcc.Graph(id="toss_win_graph",figure=fig5),html.Label("select_year",style={"fontSize":20}),dcc.Slider(
         df['season'].min(),
         df['season'].max(),
         step=None,
